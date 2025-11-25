@@ -141,9 +141,31 @@ Website resmi Nusantara Trading Center - Pusat informasi layanan, artikel edukas
    ```
 
 8. **Setup storage link**
+
+   **Opsi 1: Menggunakan Artisan (jika fungsi exec() tersedia)**
    ```bash
    php artisan storage:link
    ```
+
+   **Opsi 2: Membuat symlink secara manual (jika exec() dinonaktifkan)**
+   ```bash
+   # Pastikan berada di direktori public_html
+   cd ~/public_html
+   
+   # Hapus folder storage jika sudah ada
+   rm -rf public/storage
+   
+   # Buat symbolic link secara manual
+   ln -s ../storage/app/public public/storage
+   
+   # Atau jika struktur berbeda, coba:
+   ln -s ../../storage/app/public public/storage
+   
+   # Verifikasi symlink berhasil
+   ls -la public/storage
+   ```
+
+   **Catatan**: Jika symlink tidak bisa dibuat, aplikasi akan otomatis menggunakan route fallback untuk serve file dari storage.
 
 9. **Optimize untuk production**
    ```bash
