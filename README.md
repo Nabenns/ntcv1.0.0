@@ -167,6 +167,23 @@ Website resmi Nusantara Trading Center - Pusat informasi layanan, artikel edukas
 
    **Catatan**: Jika symlink tidak bisa dibuat, aplikasi akan otomatis menggunakan route fallback untuk serve file dari storage.
 
+9. **Setup Vite manifest (untuk Opsi 2 deployment)**
+
+   Jika menggunakan Opsi 2 (isi public dikeluarkan ke root), buat symlink untuk manifest.json:
+   ```bash
+   cd ~/public_html/laravel
+   
+   # Buat folder public/build jika belum ada
+   mkdir -p public/build
+   
+   # Buat symlink manifest.json dari root ke laravel/public/build
+   ln -s ../../build/manifest.json public/build/manifest.json
+   
+   # Atau copy file jika symlink tidak bisa dibuat
+   cp ../build/manifest.json public/build/manifest.json
+   cp -r ../build/assets public/build/
+   ```
+
 9. **Optimize untuk production**
    ```bash
    php artisan config:cache
