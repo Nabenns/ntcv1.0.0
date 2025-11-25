@@ -17,20 +17,21 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $title = \fake()->unique()->sentence(5);
-        $published = \fake()->boolean(80);
+        $faker = $this->faker ?? \Faker\Factory::create();
+        $title = $faker->unique()->sentence(5);
+        $published = $faker->boolean(80);
 
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'author' => \fake()->name(),
-            'summary' => \fake()->paragraph(),
+            'author' => $faker->name(),
+            'summary' => $faker->paragraph(),
             'content' => collect(range(1, 5))
-                ->map(fn () => '<p>'.\fake()->paragraph(6).'</p>')
+                ->map(fn () => '<p>'.$faker->paragraph(6).'</p>')
                 ->implode("\n"),
             'thumbnail_path' => null,
             'is_published' => $published,
-            'published_at' => $published ? \fake()->dateTimeBetween('-2 years') : null,
+            'published_at' => $published ? $faker->dateTimeBetween('-2 years') : null,
         ];
     }
 }
