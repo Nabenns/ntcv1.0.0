@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $this->call([
-            ArticleSeeder::class,
-        ]);
+        // Comment ArticleSeeder sementara karena Faker issue di production
+        // Uncomment jika Faker sudah terinstall dengan benar
+        // $this->call([
+        //     ArticleSeeder::class,
+        // ]);
     }
 }
