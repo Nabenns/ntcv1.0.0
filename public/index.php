@@ -5,6 +5,10 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Define PUBLIC_PATH untuk Opsi 2 deployment (isi public dikeluarkan ke root)
+// Path ini akan digunakan oleh AppServiceProvider untuk override public_path()
+define('PUBLIC_PATH', __DIR__);
+
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/laravel/storage/framework/maintenance.php')) {
     require $maintenance;
