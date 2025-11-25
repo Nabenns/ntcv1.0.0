@@ -8,6 +8,10 @@ define('LARAVEL_START', microtime(true));
 // Define PUBLIC_PATH untuk Opsi 2 deployment (isi public dikeluarkan ke root)
 define('PUBLIC_PATH', __DIR__);
 
+// Load custom helper SEBELUM vendor/autoload.php agar bisa override public_path()
+// Ini penting agar public_path() mengarah ke root (public_html) bukan laravel/public
+require_once __DIR__.'/laravel/app/helpers.php';
+
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/laravel/storage/framework/maintenance.php')) {
     require $maintenance;
@@ -15,10 +19,6 @@ if (file_exists($maintenance = __DIR__.'/laravel/storage/framework/maintenance.p
 
 // Register the Composer autoloader...
 require __DIR__.'/laravel/vendor/autoload.php';
-
-// Load custom helper untuk override public_path() SEBELUM Laravel bootstrap
-// Ini penting agar public_path() mengarah ke root (public_html) bukan laravel/public
-require_once __DIR__.'/laravel/app/helpers.php';
 
 // Bootstrap Laravel and handle the request...
 /** @var Application $app */
